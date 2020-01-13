@@ -1,4 +1,4 @@
-abstract public class Person implements Buyable {
+abstract public class Person implements Buyable, Payable {
     protected String name;
     protected float balance;
 
@@ -16,7 +16,17 @@ abstract public class Person implements Buyable {
     }
 
     @Override
-    public void buyProduct(Fabrique fabrique, Products product) {
+    public void buyProduct(Bredlam bredlam, Products product) {
 
+    }
+
+    @Override
+    public void income(float amount) {
+        this.balance += amount;
+    }
+
+    @Override
+    public void charge(float amount) {
+        this.balance -= amount;
     }
 }

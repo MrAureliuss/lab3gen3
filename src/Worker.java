@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class Worker extends Person implements Payable{
+public class Worker extends Person {
     private int anger;
     private float salary;
 
@@ -37,16 +37,9 @@ public class Worker extends Person implements Payable{
         this.anger = 0;
     }
 
-    @Override
-    public void income(float amount) {
-        this.balance += amount;
+    public void work() {
         this.anger += 10;
         if (anger >= 100) { riot(); } // Если работяга уж слишком не доволен, то бунтуем.
-    }
-
-    @Override
-    public void charge(float amount) {
-        this.balance -= amount;
     }
 
     @Override

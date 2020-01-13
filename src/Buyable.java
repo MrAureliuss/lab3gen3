@@ -1,3 +1,3 @@
 public interface Buyable {
-    void buyProduct(Fabrique fabrique, Products product);
+    void buyProduct(Bredlam bredlam, Products product);
 }

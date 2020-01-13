@@ -5,6 +5,7 @@ public class Fabrique {
     private Capitalist owner;
     private List<Worker> workers;
     private Products productType;
+    private int productCount = 500;
 
     public Fabrique(Products productType, Capitalist owner, List<Worker> workers) {
         this.productType = productType;
@@ -38,8 +39,12 @@ public class Fabrique {
         workers.forEach(x -> x.income(baseSalary));
     }
 
-    public void sellProduct(Fabrique fabrique, Products productType) {
+    public int getProductCount() {
+        return this.productCount;
+    }
 
+    public void makeProduct() {
+        productCount += 1;
     }
 
 }

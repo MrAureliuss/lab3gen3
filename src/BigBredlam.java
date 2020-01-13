@@ -3,15 +3,13 @@ import java.util.List;
 import java.util.Random;
 
 public class BigBredlam {
-    String name;
     final String owner = "Спрутс";
     List<Bredlam> bredlams;
     private boolean united = false;
     private float totalPayout;
     private float baseSalary;
 
-    public BigBredlam(String name) {
-        this.name = name;
+    public BigBredlam() {
     }
 
     public float getBaseSalary() {
@@ -91,4 +89,18 @@ public class BigBredlam {
             bredlam.getFabriquesFromBredlam().forEach(x -> x.payWorkerSalary(baseSalary));
         }
     }
+
+    public void sellProducts() {
+        bredlams.forEach(bredlam -> bredlam.getFabriquesFromBredlam()
+                .forEach(fabrique -> fabrique.getWorkersFromFabrique()
+                        .forEach(worker ->{
+                            bredlam.sellProduct(worker);
+                            worker.work();
+                        })));
+    }
+
+    public void tick() {
+        sellProducts();
+        paySalary();
+    }  // Базовый метод для работы всей лабы.
 }
