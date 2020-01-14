@@ -47,8 +47,11 @@ public class Bredlam {
         }
     }
 
-    public void sellProduct(Person person) {
+    public void sellProduct(Person person) throws NoProductException {
         // СЮДА ОШИБКУ О ТОМ, ЧТО ПРОДУКТОВ НЕТ
+        if(productCount < 0){
+            throw new NoProductException("Нет продуктов");
+        }
         person.charge(productPrice); // Снимаем человеку деньги со счета.
         fabriques.forEach(fabrique -> {fabrique.getOwner().income(productPrice / 4);  // Отдаем капиталисту четвертую часть от прибыли.
             System.out.println("Работяга " + person.getName() +" раскошелился на " + productType.name() + ", капиталист " + fabrique.getOwner().getName() +

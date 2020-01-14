@@ -18,17 +18,17 @@ public class BigBredlam {
 
     public void createBredlams() {
         List<Bredlam> bredlams = new ArrayList<>();
-        for (Products products: Products.values()) {
+        for (Products products : Products.values()) {
             bredlams.add(Bredlam.createBredlam(products));
         }
 
         this.bredlams = bredlams;
-    }  // Создание листа всех бредламов.
+    } // Создание листа всех бредламов.
 
     public List<Capitalist> getAllCapitalistsFromBredlams() {
         List<Capitalist> capitalists = new ArrayList<>();
-        for (Bredlam bredlam:this.bredlams) {
-            for (Fabrique fabrique: bredlam.getFabriquesFromBredlam()) {
+        for (Bredlam bredlam : this.bredlams) {
+            for (Fabrique fabrique : bredlam.getFabriquesFromBredlam()) {
                 capitalists.add(fabrique.getOwner());
             }
         }
@@ -50,15 +50,16 @@ public class BigBredlam {
     public void setTotalPayout() {
         if (united) {
             Random random = new Random();
-            for(Capitalist capitalist:getAllCapitalistsFromBredlams()) {
+            for (Capitalist capitalist : getAllCapitalistsFromBredlams()) {
                 // Скидываемся в общак для общей зарплаты
                 float payoutRatio = (float) (0.02 + random.nextFloat() * (0.15 - 0.02));
                 float payoutAmount = capitalist.balance * payoutRatio;
                 capitalist.charge(payoutAmount);
-                System.out.println(capitalist.getName()+" скинулся в общак " + payoutAmount + " тугриков");
+                System.out.println(capitalist.getName() + " скинулся в общак " + payoutAmount + " тугриков");
                 totalPayout += payoutAmount;
             }
-            System.out.println("Общим решением, капиталисты вынули из своих подлых кармашек и скинули в общак " + this.totalPayout + " тугриков");
+            System.out.println("Общим решением, капиталисты вынули из своих подлых кармашек и скинули в общак "
+                    + this.totalPayout + " тугриков");
         } else {
             System.out.println("Беды с башкой? Капиталисты еще не собрались!");
         }
@@ -68,16 +69,16 @@ public class BigBredlam {
         int workersCount = 0;
         List<Worker> workers = new ArrayList<>();
         if (united) {
-            for (Bredlam bredlam:this.bredlams) {
-                for (Fabrique fabrique: bredlam.getFabriquesFromBredlam()) {
+            for (Bredlam bredlam : this.bredlams) {
+                for (Fabrique fabrique : bredlam.getFabriquesFromBredlam()) {
                     workersCount += fabrique.getWorkersFromFabrique().size();
                 }
             }
 
             baseSalary = totalPayout / workersCount;
 
-            for (Bredlam bredlam:this.bredlams) {
-                for (Fabrique fabrique: bredlam.getFabriquesFromBredlam()) {
+            for (Bredlam bredlam : this.bredlams) {
+                for (Fabrique fabrique : bredlam.getFabriquesFromBredlam()) {
                     fabrique.getWorkersFromFabrique().forEach(x -> x.setSalary(baseSalary));
                 }
             }
@@ -90,16 +91,19 @@ public class BigBredlam {
     }
 
     public void paySalary() {
-        for (Bredlam bredlam:this.bredlams) {
+        for (Bredlam bredlam : this.bredlams) {
             bredlam.getFabriquesFromBredlam().forEach(x -> x.payWorkerSalary(baseSalary));
         }
     }
 
     public void sellProducts() {
         bredlams.forEach(bredlam -> bredlam.getFabriquesFromBredlam()
-                .forEach(fabrique -> fabrique.getWorkersFromFabrique()
-                        .forEach(worker ->{
-                            bredlam.sellProduct(worker);
+                .forEach(fabrique -> fabrique.getWorkersFromFabrique().forEach(worker -> {
+                    try {
+                        bredlam.sellProduct(worker);
+                    } catch (NoProductException e) {
+                       System.out.println("На фабрике кончились продукты");;
+                    }
                             worker.work();
                         })));
     }
