@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Bredlam {
     private List<Fabrique> fabriques;
@@ -73,5 +74,20 @@ public class Bredlam {
         return new Bredlam(Fabrique.createFabriques(2, productType), productType);
     }  // Создание одиночного Бредлама по типу продукта.
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bredlam)) return false;
+        Bredlam bredlam = (Bredlam) o;
+        return Float.compare(bredlam.productPrice, productPrice) == 0 &&
+                productCount == bredlam.productCount &&
+                productSaleCoefficient == bredlam.productSaleCoefficient &&
+                Objects.equals(fabriques, bredlam.fabriques) &&
+                productType == bredlam.productType;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(fabriques, productType, productPrice, productCount, productSaleCoefficient);
+    }
 }

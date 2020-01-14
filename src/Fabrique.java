@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Fabrique {
     private Capitalist owner;
@@ -47,4 +48,19 @@ public class Fabrique {
         productCount += 1;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Fabrique)) return false;
+        Fabrique fabrique = (Fabrique) o;
+        return productCount == fabrique.productCount &&
+                Objects.equals(owner, fabrique.owner) &&
+                Objects.equals(workers, fabrique.workers) &&
+                productType == fabrique.productType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(owner, workers, productType, productCount);
+    }
 }

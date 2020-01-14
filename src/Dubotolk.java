@@ -23,4 +23,6 @@ class Dubotolk extends Person implements Speaking {
         System.out.println(this.name+" спизданул, что "+text);
 
     }
+
+
 }

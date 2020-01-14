@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class Capitalist extends Person {
@@ -43,4 +44,16 @@ public class Capitalist extends Person {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Capitalist)) return false;
+        Capitalist that = (Capitalist) o;
+        return notified == that.notified;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(notified);
+    }
 }

@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Worker extends Person {
     private float salary;
@@ -62,5 +59,20 @@ public class Worker extends Person {
     @Override
     public String toString() {
         return super.name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        
+        if (this == o) return true;
+        if (!(o instanceof Worker)) return false;
+        if (!super.equals(o)) return false;
+        Worker worker = (Worker) o;
+        return Float.compare(worker.salary, salary) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), salary);
     }
 }

@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 abstract public class Entity{
     protected float width;
     protected float length;
@@ -15,5 +17,21 @@ abstract public class Entity{
         this.height = height;
         this.length = length;
         this.weight = weight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Entity)) return false;
+        Entity entity = (Entity) o;
+        return Float.compare(entity.width, width) == 0 &&
+                Float.compare(entity.length, length) == 0 &&
+                Float.compare(entity.height, height) == 0 &&
+                Float.compare(entity.weight, weight) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(width, length, height, weight);
     }
 }

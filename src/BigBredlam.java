@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class BigBredlam {
@@ -139,5 +140,22 @@ public class BigBredlam {
         public void giveSpeech(String text){
             System.out.println("Спрутс спизданул, что "+text);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BigBredlam)) return false;
+        BigBredlam that = (BigBredlam) o;
+        return united == that.united &&
+                Float.compare(that.totalPayout, totalPayout) == 0 &&
+                Float.compare(that.baseSalary, baseSalary) == 0 &&
+                Objects.equals(owner, that.owner) &&
+                Objects.equals(bredlams, that.bredlams);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(owner, bredlams, united, totalPayout, baseSalary);
     }
 }
