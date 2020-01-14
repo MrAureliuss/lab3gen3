@@ -42,6 +42,11 @@ public class BigBredlam {
         getAllCapitalistsFromBredlams().forEach(x -> System.out.println("На встречу прибыл " + x.getName()));
     }
 
+    public void getAllCapitalistsWonder() {
+        System.out.println("Капиталисты испугались, что им придет пезда");
+        getAllCapitalistsFromBredlams().forEach(x -> x.addDisappointment(5));
+    }
+
     public void setTotalPayout() {
         if (united) {
             Random random = new Random();
@@ -103,4 +108,32 @@ public class BigBredlam {
         sellProducts();
         paySalary();
     }  // Базовый метод для работы всей лабы.
+
+    class Secretary extends Person {
+        Secretary(String name, float balance) {
+            super(name, balance);
+        }
+
+        public void notifyCapitalists() {
+            bredlams.forEach(bredlam -> bredlam.getFabriquesFromBredlam()
+            .forEach(fabrique -> fabrique.getOwner().notifyCapitalist()));
+        }
+    }
+
+    class Table extends Entity{
+        Table(float width, float length, float height){
+            super(width, length, height);
+        }        
+    }
+
+    final class Sproots extends Person implements Speaking {
+        Sproots(float balance){
+            super("Господин Спрутс", balance);
+        }
+        
+        @Override
+        public void giveSpeech(String text){
+            System.out.println("Спрутс спизданул, что "+text);
+        }
+    }
 }

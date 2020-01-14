@@ -3,8 +3,8 @@ public enum Products {
     BREAD("Хлеб"),
     CHEESE("Сыр"),
     LEATHER("Кожа"),
-    COAL("Уголь");
-
+    COAL("Уголь"),
+    WOOD("Дерево");
     private String product;
 
     Products(String product) {

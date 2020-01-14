@@ -4,12 +4,28 @@ import java.util.List;
 import java.util.Random;
 
 public class Worker extends Person {
-    private int anger;
     private float salary;
 
-    public Worker(String name, float balance, int anger) {
+    @Override
+    public void addDisappointment(int disappointment){
+        if(this.disappointment >= 100){
+            riot();
+        } else if (this.disappointment < 0) {
+            this.disappointment += 0;
+        } else {
+            this.disappointment += disappointment;
+        }
+        if (disappointment > 0){
+            System.out.println("Рабочий "+super.name + " повысил уровень злобы до "+this.disappointment);
+
+        }else{
+            System.out.println("Рабочий "+super.name + " понизил уровень злобы до "+this.disappointment);
+        }
+    }
+
+    public Worker(String name, float balance, int disappointment) {
         super(name, balance);
-        this.anger = anger;
+        this.disappointment = disappointment;
     }
 
     public void setSalary(float salary) {
@@ -34,12 +50,13 @@ public class Worker extends Person {
 
     private void riot() {
         System.out.println("ШОК! РАБОТЯГА " + name + " ВЗБУНТОВАЛСЯ! А стоп... Это же мир бредламов, который похож на одну страну.. Бунт отменяется");
-        this.anger = 0;
+        this.disappointment = 0;
     }
 
     public void work() {
-        this.anger += 10;
-        if (anger >= 100) { riot(); } // Если работяга уж слишком не доволен, то бунтуем.
+        addDisappointment(2);
+        System.out.println("РАБОТЯГА " + name + " ПОШЕЛ НА ЗАВОД ДЕЛАТЬ КИРПИЧИ!");
+
     }
 
     @Override

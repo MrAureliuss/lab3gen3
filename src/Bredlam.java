@@ -41,6 +41,9 @@ public class Bredlam {
             case LEATHER:
                 productSaleCoefficient = 8000;
                 break;
+            case WOOD:
+                productSaleCoefficient = 1000;
+                break;
         }
     }
 

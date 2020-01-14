@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Capitalist extends Person {
+    private boolean notified;
     public Capitalist(String name, float balance) {
         super(name, balance);
     }
@@ -15,4 +16,31 @@ public class Capitalist extends Person {
 
         return new Capitalist(names.get(random.nextInt(names.size())), 5000000 + random.nextInt(50000));
     }
+
+    public void notifyCapitalist(){
+        this.notified = true;
+        System.out.println("КАПИТАЛИСТ " + this.name + "ПОЛУЧИЛ ОПОВЕЩЕНИЕ ПРИБЫТЬ НА СТРЕЛКУ");
+    }
+
+    public boolean isNotified(){
+        return notified;
+    }
+
+    @Override
+    public void addDisappointment(int disappointment){
+        if(this.disappointment >= 100) {
+            System.out.println("Капиталист "+ this.name + " ахуел");
+        } else if (this.disappointment < 0) {
+            this.disappointment += 0;
+        } else {
+            this.disappointment += disappointment;
+        }
+        if (disappointment > 0){
+            System.out.println("Капиталист "+super.name + " повысил уровень злобы до "+this.disappointment);
+
+        }else{
+            System.out.println("Капиталист "+super.name + " понизил уровень злобы до "+this.disappointment);
+        }
+    }
+
 }
