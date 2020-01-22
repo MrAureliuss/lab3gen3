@@ -24,5 +24,5 @@ class Dubotolk extends Person implements Speaking {
 
     }
 
-
+    // А почему не может?
 }

@@ -5,6 +5,7 @@ abstract public class Person implements Buyable, Payable {
     protected float balance;
     protected int disappointment;
 
+
     public void addDisappointment(int disappointment){
         if(this.disappointment >= 100){
             this.disappointment += 100;

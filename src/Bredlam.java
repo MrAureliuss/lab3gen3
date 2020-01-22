@@ -19,9 +19,13 @@ public class Bredlam {
         fabriques.forEach(fabrique -> productCount += fabrique.getProductCount()); // берем количество продуктов с наших фабрик.
     }
 
-    public void setProductPrice() {
+    public void setProductPrice() throws ArithmeticException {
+
         getAllProductCountFromFabriques();
         setProductSaleCoefficient();
+        if(productCount <= 0){
+            throw new ArithmeticException("Недостаточно продуктов, чтобы посчитать цену");
+        }
         productPrice = productSaleCoefficient / productCount;
     }
 

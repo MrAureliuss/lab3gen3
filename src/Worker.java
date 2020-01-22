@@ -18,6 +18,7 @@ public class Worker extends Person {
         }else{
             System.out.println("Рабочий "+super.name + " понизил уровень злобы до "+this.disappointment);
         }
+        beatWhore();
     }
 
     public Worker(String name, float balance, int disappointment) {
@@ -53,6 +54,22 @@ public class Worker extends Person {
     public void work() {
         addDisappointment(2);
         System.out.println("РАБОТЯГА " + name + " ПОШЕЛ НА ЗАВОД ДЕЛАТЬ КИРПИЧИ!");
+
+    }
+
+    public void beatWhore() {
+        class Wife extends Person {
+            Wife(String name, float balance) {
+                super(name, balance);
+            }
+
+            void getDamage(Worker husband) {
+                System.out.println("Баба получила пизды. В общем-то, ничего нового. Рабочий " + Worker.this.name + " любезно выдал их ей.");
+            }
+        }
+
+        Wife wife = new Wife("Наташа", 1);
+        wife.getDamage(this);
 
     }
 
